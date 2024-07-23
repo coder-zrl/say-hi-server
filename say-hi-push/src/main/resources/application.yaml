@@ -13,9 +13,11 @@ spring:
     port: 6377
     password:
 grpc:
+  client:
+    # 可以申明多个Grpc服务的ip和端口，后续注入通过 sayHiImClient 注入
+    say-hi-im-service:
+      negotiationType: PLAINTEXT
+      address: localhost:9090
+
   server:
-    in-process-name: say-hi-sdk-grpc
-    # 修改服务端默认入参最大大小，默认值为4M ，这里修改为20M   20*1024*1024
-    max-inbound-message-size: 20971520
-    # grpc 端口号
-    port: 11002
+    port: 9091

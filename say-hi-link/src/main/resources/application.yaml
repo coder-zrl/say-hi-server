@@ -14,8 +14,9 @@ spring:
     password:
 grpc:
   server:
-    in-process-name: say-hi-sdk-grpc
-    # 修改服务端默认入参最大大小，默认值为4M ，这里修改为20M   20*1024*1024
-    max-inbound-message-size: 20971520
+#    in-process-name: say-hi-sdk-grpc
+#    # 修改服务端默认入参最大大小，默认值为4M ，这里修改为20M   20*1024*1024
+#    max-inbound-message-size: 20971520
     # grpc 端口号
-    port: 11001
+    port: 9090
+    address: 0.0.0.0

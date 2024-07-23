@@ -15,7 +15,7 @@ public class ProtoUtils {
     /**
      * 将 proto格式的 Message 打印为一行输出到日志中
      */
-    public static String toOneLine(Message message) {
+    public static String oneLine(Message message) {
         if (message == null) {
             return StringUtils.EMPTY;
         }
