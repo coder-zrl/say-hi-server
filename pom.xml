@@ -23,10 +23,9 @@
     <modules>
         <module>say-hi-link</module>
         <module>say-hi-push</module>
-        <module>say-hi-link</module>
         <module>say-hi-component</module>
         <module>say-hi-sdk</module>
-        <module>say-hi-component</module>
+        <module>say-hi-im</module>
     </modules>
 
     <dependencies>
