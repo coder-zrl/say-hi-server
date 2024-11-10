@@ -20,11 +20,12 @@ message Message {
     int64 delete_time = 14; // 消息删除时间
 }
 
-
 enum MessageType {
-    text = 0;
-    image = 1;
-    red_packet = 2;
+    text = 0; // 文本
+    image = 1; // 图片
+    video = 2; // 视频
+
+    red_packet = 201; // 红包
 }
 
 message SendMessageRequest {

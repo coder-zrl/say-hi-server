@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package com.bird.say.hi.sdk;
+
+option java_package = "com.bird.say.hi.im.sdk";
+option java_outer_classname = "MessageContent";
+option java_multiple_files = true;
+
+
+// 文本格式消息内容
+message TestMessage {
+  string text = 1; // 文本内容
+}
+
+// 图片类型消息
+message ImageMessage {
+  string url = 1; // 文件URL
+}
+
+// 视频类型消息
+message VideoContent {
+  string video_url = 1; // 视频文件URL
+  string cover_url = 2; // 封面URL
+}
