@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package com.bird.say.hi.sdk;
+
+option java_package = "com.bird.say.hi.im.sdk.message";
+option java_multiple_files = true;
+
+message Message {
+  int64 seq_id = 1; // 回话内消息序号，通常情况下严格单调递增
+  int64 from_user_id = 2; // 发送方ID（群ID or 用户ID）
+  int64 target_user_id = 3; // 接收方ID（群ID or 用户ID）
+  MessageType message_type = 4;
+  string content = 5;
+  repeated int64 receivers = 6; // 消息可见用户
+  repeated int64 exclude_receivers = 7; // 消息不可见用户
+  int64 create_time = 8;
+}
+
+enum MessageType {
+  UN_KNOW = 0;
+  TEXT = 1; // 文本
+  IMAGE = 2; // 图片
+  VIDEO = 4; // 视频
+  AUDIO = 5; // 音频
+  FILE = 6; // 文件
+}
