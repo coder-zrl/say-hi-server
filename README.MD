@@ -18,3 +18,13 @@ websocket 包结构：
   "data": "{\"content\":\"test\"}"
 }
 ```
+
+打包 Docker 镜像命令：
+
+```shell
+# 仅打包
+sh ./build.sh
+
+# 打包并启动 container
+sh ./build.sh run
+```
