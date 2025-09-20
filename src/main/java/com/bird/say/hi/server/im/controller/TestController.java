@@ -1,9 +1,17 @@
 package com.bird.say.hi.server.im.controller;
 
+import com.bird.say.hi.server.im.controller.request.TestRequest;
 import io.lettuce.core.api.sync.RedisCommands;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -12,15 +20,37 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @Slf4j
+@Tag(name = "测试Controller")
 public class TestController {
     @Autowired
     private RedisCommands<String, String> redisClient;
 
-    @RequestMapping("/test")
-    public String test() {
-        String set = redisClient.set("test", "hahaha");
+    @Operation(summary = "普通body请求+Param+Header+Path")
+    @Parameters({
+            @Parameter(name = "id",description = "文件id",in = ParameterIn.PATH),
+            @Parameter(name = "token",description = "请求token",required = true, in = ParameterIn.HEADER),
+            @Parameter(name = "name",description = "文件名称",required = true, in=ParameterIn.QUERY)
+    })
+    @GetMapping("/test")
+    public String test(String name) {
+        String set = redisClient.set("test", name);
         log.info("set result:{}", set);
 
         return redisClient.get("test");
+    }
+
+    @Operation(summary = "简单测试")
+    @GetMapping("/test2")
+    public String test2(String name) {
+        String set = redisClient.set("test", name);
+        log.info("set result:{}", set);
+
+        return redisClient.get("test");
+    }
+
+    @Operation(summary = "简单测试@RequestBody")
+    @PostMapping("/test3")
+    public String test3(@RequestBody TestRequest testRequest) {
+        return testRequest.toString();
     }
 }
