@@ -21,6 +21,17 @@ spring:
           max-idle: 10
           # 连接池中的最小空闲连接
           min-idle: 0
+  freemarker:
+    enabled: false   # 让 Spring Boot 不再自动配置 FreeMarkerConfigurer
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl   # 打印SQL
+  global-config:
+    db-config:
+      logic-delete-field: deleted # 全局逻辑删除字段名(deleted为实体类属性名称)
+      logic-delete-value: 1 # 逻辑已删除值。可选，默认值为 1
+      logic-not-delete-value: 0 # 逻辑未删除值。可选，默认值为 0
 
 # springdoc-openapi项目配置
 springdoc:

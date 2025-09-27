@@ -1,4 +1,4 @@
-package com.bird.say.hi.server.config;
+package com.bird.say.hi.server.common.config;
 
 import cn.dev33.satoken.interceptor.SaInterceptor;
 import org.springframework.context.annotation.Configuration;
