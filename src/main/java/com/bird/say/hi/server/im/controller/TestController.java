@@ -1,5 +1,7 @@
 package com.bird.say.hi.server.im.controller;
 
+import cn.dev33.satoken.annotation.SaCheckLogin;
+import cn.dev33.satoken.stp.StpUtil;
 import com.bird.say.hi.server.im.controller.request.TestRequest;
 import io.lettuce.core.api.sync.RedisCommands;
 import io.swagger.v3.oas.annotations.Operation;
@@ -52,5 +54,19 @@ public class TestController {
     @PostMapping("/test3")
     public String test3(@RequestBody TestRequest testRequest) {
         return testRequest.toString();
+    }
+
+    @Operation(summary = "测试登录")
+    @PostMapping("/login")
+    public String login(@RequestBody TestRequest testRequest) {
+        StpUtil.login(testRequest.getName());
+        return StpUtil.getTokenInfo().toString();
+    }
+
+    @Operation(summary = "测试接口需要登录")
+    @PostMapping("/needLogin")
+    @SaCheckLogin
+    public String needLogin(@RequestBody TestRequest testRequest) {
+        return "校验通过";
     }
 }

@@ -34,3 +34,18 @@ API 接口文档
 ```shell
 http://localhost:10086/doc.html
 ```
+
+Sa-Token
+
+官方文档：https://sa-token.cc/doc.html#/
+
+登录接口会让浏览器自动塞cookie
+
+```shell
+Response Header
+
+set-cookie
+satoken=28956fd0-9257-473c-a1af-98a37d163e56; Max-Age=2592000; Expires=Mon, 27 Oct 2025 22:51:16 +0800; Path=/
+```
+
+后序前端请求，带上对应cookie即可
