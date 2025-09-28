@@ -2,6 +2,17 @@ server:
   port: 10086
 
 spring:
+  application:
+    name: say-hi-im
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.68.198:8848
+      config:
+        server-addr: 192.168.68.198:8848
+#        refresh-enabled: true
+  config:
+    import: "nacos:say-hi-im.yaml"
   datasource:
     url: jdbc:mysql://192.168.68.198:3306/say_hi?useSSL=false&serverTimezone=Asia/Shanghai
     username: root
@@ -21,8 +32,6 @@ spring:
           max-idle: 10
           # 连接池中的最小空闲连接
           min-idle: 0
-  freemarker:
-    enabled: false   # 让 Spring Boot 不再自动配置 FreeMarkerConfigurer
 
 mybatis-plus:
   configuration:

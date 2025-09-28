@@ -1,5 +1,6 @@
 package com.bird.say.hi.server;
 
+import com.alibaba.cloud.nacos.ConditionalOnNacosDiscoveryEnabled;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,6 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * 需要指定具体路径，否则可能会导致接口被注册为bean，beanName和实现类相同
  */
 @MapperScan("com.bird.say.hi.server.im.message.mapper")
+@ConditionalOnNacosDiscoveryEnabled
 public class SayHiServerApplication {
 
 	public static void main(String[] args) {

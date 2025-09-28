@@ -10,17 +10,23 @@ import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Optional;
 
 /**
  * @author Bird <coder-zrl@qq.com>
  * Created on 2025-08-30
  */
 @RestController
+@RefreshScope
 @Slf4j
 @Tag(name = "测试Controller")
 public class TestController {
@@ -68,5 +74,14 @@ public class TestController {
     @SaCheckLogin
     public String needLogin(@RequestBody TestRequest testRequest) {
         return "校验通过";
+    }
+
+    @Value("${testNacos:unknown}")
+    private String testNacos;
+
+    @Operation(summary = "测试testNacos")
+    @PostMapping("/testNacos")
+    public String testNacos() {
+        return Optional.ofNullable(testNacos).orElse(StringUtils.EMPTY);
     }
 }
