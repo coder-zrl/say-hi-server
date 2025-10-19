@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package com.bird.say.hi.sdk;
+
+option java_package = "com.bird.say.hi.sdk.common";
+option java_outer_classname = "ErrorCodeProto";
+option java_multiple_files = true;
+
+enum ErrorCode {
+  UN_SUCCESS = 0;
+  SUCCESS = 1;
+
+
+  SYSTEM_BUSY = 400001; // 系统繁忙
+  ILLEGAL_PARAMETER = 400002; // 参数错误
+}

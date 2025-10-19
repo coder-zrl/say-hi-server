@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: say-hi-gateway
+#  profiles:
+#    active: dev # dev-本地开发环境, test-测试环境, prod-生产环境
+  config:
+    import:
+      - "classpath:application-common.yaml"
+      - "optional:nacos:say-hi-gateway.yaml"
+
+server:
+  port: 10086
+  tomcat:
+    max-swallow-size: -1
+

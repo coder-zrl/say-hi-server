@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package com.bird.say.hi.im.sdk;
+
+option java_package = "com.bird.say.hi.im.sdk";
+option java_outer_classname = "SayHiMessageProto";
+option java_multiple_files = true;
+
+message Message {
+    int64 message_id = 1; // 全局唯一消息Id
+    int64 channel_id = 2; // 会话Id
+    int64 seq_id = 3; // 会话维度递增趋势的Id，用于消息排序
+    int64 from_user_id = 4; // 发送者Id
+    MessageType message_type = 5; // 消息类型
+    string content = 9; // 消息内容
+    string show_text = 10; // 消息在会话列表中展示内容
+    int64 expire_time = 11; // 消息过期时间
+    int64 create_time = 12; // 消息创建时间
+    int64 update_time = 13; // 消息更新时间
+    int64 delete_time = 14; // 消息删除时间
+}
+
+enum MessageType {
+    text = 0; // 文本
+    image = 1; // 图片
+    video = 2; // 视频
+
+    red_packet = 201; // 红包
+}
+
+message SendMessageRequest {
+    int64 user_id = 1;
+}
+
+message SendMessageResponse {
+    int32 error_code = 1;
+    string error_msg = 2;
+}
+
+service MessageService {
+    rpc SendMessage(SendMessageRequest) returns (SendMessageResponse);
+}

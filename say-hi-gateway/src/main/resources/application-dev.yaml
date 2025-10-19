@@ -1,0 +1,6 @@
+spring:
+  config:
+    import:
+      - "classpath:application-common.yaml"
+      - "optional:nacos:say-hi-gateway.yaml"
+

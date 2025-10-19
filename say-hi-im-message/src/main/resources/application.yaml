@@ -1,0 +1,15 @@
+server:
+  port: 10087
+  tomcat:
+    max-swallow-size: -1
+grpc:
+  server:
+    port: 9087
+
+spring:
+  application:
+    name: say-hi-im-message
+  config:
+    import:
+      - "classpath:application-common.yaml"
+      - "optional:nacos:say-hi-im-message.yaml"

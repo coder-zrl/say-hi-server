@@ -1,0 +1,34 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.68.198:8848
+      config:
+        server-addr: 192.168.68.198:8848
+  datasource:
+    url: jdbc:mysql://192.168.68.198:3306/say_hi?useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+  data:
+    redis:
+      host: 192.168.68.198
+      port: 6378
+      timeout: 10s
+      lettuce:
+        pool:
+          max-active: 200
+          max-wait: -1ms
+          max-idle: 10
+          min-idle: 0
+
+logging:
+  level:
+    root: info
+
+grpc:
+  client:
+    say-hi-im-message:
+      address: 'discovery:///say-hi-im-message' # 使用发现协议指向服务名
+      negotiation-type: plaintext
+      enableKeepAlive: true
+      keepAliveWithoutCalls: true

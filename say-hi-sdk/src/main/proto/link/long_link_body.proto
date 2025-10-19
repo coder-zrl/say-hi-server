@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package com.bird.say.hi.sdk;
+
+option java_package = "com.bird.say.hi.link.sdk";
+option java_outer_classname = "SayHiLongLinkProto";
+option java_multiple_files = true;
+
+import "common/common.proto";
+
+message LongLinkBody {
+  RequestClientInfo client_info = 1; // 请求的客户端信息
+  string command = 2; // 长连信令
+  bytes body = 3; // 长连的业务数据
+}
