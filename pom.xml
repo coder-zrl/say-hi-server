@@ -18,6 +18,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>say-hi-application</module>
         <module>say-hi-common</module>
         <module>say-hi-im-message</module>
         <module>say-hi-im-chat</module>

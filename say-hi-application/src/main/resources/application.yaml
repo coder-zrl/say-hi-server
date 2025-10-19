@@ -1,0 +1,44 @@
+modules:
+  service-names:
+    - say-hi-gateway
+    - say-hi-im-message
+
+spring:
+  application:
+    name: say-hi-application
+  config:
+    import: optional:nacos:common.yaml
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.68.198:8848
+      config:
+        server-addr: 192.168.68.198:8848
+  datasource:
+    url: jdbc:mysql://192.168.68.198:3306/say_hi?useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+  data:
+    redis:
+      host: 192.168.68.198
+      port: 6378
+      timeout: 10s
+      lettuce:
+        pool:
+          max-active: 200
+          max-wait: -1ms
+          max-idle: 10
+          min-idle: 0
+
+server:
+  port: 10085
+
+grpc:
+  client:
+    say-hi-im-message:
+      address: 'discovery:///say-hi-im-message'
+      negotiation-type: plaintext
+      enableKeepAlive: true
+      keepAliveWithoutCalls: true
+  server:
+    port: 9999
