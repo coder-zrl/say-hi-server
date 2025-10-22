@@ -68,5 +68,12 @@
             <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
             <version>4.4.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>io.github.wangsrgit119.random.util</groupId>
+            <artifactId>suc-all-random</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+
     </dependencies>
 </project>
