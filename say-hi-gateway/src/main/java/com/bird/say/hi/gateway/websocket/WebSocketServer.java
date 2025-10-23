@@ -56,7 +56,7 @@ public class WebSocketServer {
     @OnMessage
     public void onMessage(String message, Session session) {
         LongLinkBody longLinkBody = JSONUtil.toBean(message, LongLinkBody.class);
-        log.info("receive message, message:{}, longLinkBody:{}, session:{}", message, longLinkBody, session);
+        log.info("receive message, message:{}, longLinkBody:{}, session:{}", message, JSONUtil.toJsonStr(longLinkBody), JSONUtil.toJsonStr(session));
 //        commandRouter.route(longLinkBody);
     }
 

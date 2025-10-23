@@ -5,6 +5,8 @@ import cn.dev33.satoken.stp.StpUtil;
 import com.bird.say.hi.gateway.common.Result;
 import com.bird.say.hi.gateway.common.ResultUtils;
 import com.bird.say.hi.gateway.controller.request.LoginRequest;
+import com.bird.say.hi.gateway.controller.response.LoginResponse;
+import com.bird.say.hi.gateway.model.UserInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,9 +24,19 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     @Operation(summary = "测试用户登录")
     @PostMapping("/login")
-    public Result<SaTokenInfo> login(@RequestBody LoginRequest request) {
+    public Result<LoginResponse> login(@RequestBody LoginRequest request) {
         StpUtil.login(request.getUsername());
         SaTokenInfo tokenInfo = StpUtil.getTokenInfo();
-        return ResultUtils.success("登录成功", tokenInfo);
+
+        LoginResponse response = LoginResponse.builder()
+                .tokenInfo(tokenInfo)
+                .userInfo(UserInfo.builder()
+                        .userId(111L)
+                        .nickName("黑胡")
+                        .avatar("https://img1.baidu.com/it/u=3357071773,1618494340&fm=253&app=138&f=JPEG")
+                        .build())
+                .build();
+
+        return ResultUtils.success("登录成功", response);
     }
 }

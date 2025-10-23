@@ -2,6 +2,7 @@ package com.bird.say.hi.gateway.controller;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
 import com.bird.say.hi.gateway.common.Result;
+import com.bird.say.hi.gateway.controller.response.GetChatInfoResponse;
 import com.bird.say.hi.gateway.model.ChatInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -28,7 +29,7 @@ public class ChatController {
     @SaCheckLogin
     @GetMapping("/list")
     @Operation(summary = "拉取会话列表", description = "根据时间戳拉取活跃时间超过指定水位的会话列表")
-    public Result<List<ChatInfo>> getChatSessions(
+    public Result<GetChatInfoResponse> getChatInfo(
             @Parameter(description = "时间戳，表示会话活跃时间水位线", required = true)
             @RequestParam Long timestamp,
             @Parameter(description = "返回数量限制，默认20", example = "20")
@@ -56,6 +57,11 @@ public class ChatController {
             result.add(chatInfo);
         }
 
-        return Result.success("拉取会话列表成功", result);
+        GetChatInfoResponse response = GetChatInfoResponse.builder()
+                .chatInfos(result)
+                .hasMore(false)
+                .build();
+
+        return Result.success("拉取会话列表成功", response);
     }
 }
