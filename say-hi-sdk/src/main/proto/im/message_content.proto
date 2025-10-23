@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package com.bird.say.hi.im.sdk;
+
+option java_package = "com.bird.say.hi.im.sdk";
+option java_outer_classname = "SayHiMessageContentProto";
+option java_multiple_files = true;
+
+message Text {
+    string text = 1;
+}
+
+message Image {
+    string url = 1;
+    int32 width = 2;
+    int32 height = 3;
+}
+
+message Video {
+    string url = 1; // 视频文件
+    string cover_url = 2; // 封面
+    int32 width = 3;
+    int32 height = 4;
+}

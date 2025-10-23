@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package com.bird.say.hi.im.sdk;
+
+option java_package = "com.bird.say.hi.im.sdk";
+option java_outer_classname = "SayHiChatInfoProto";
+option java_multiple_files = true;
+
+import 'im/message.proto';
+
+message ChatInfo {
+    int64 chat_id = 1; // 会话ID
+    string avatar = 2; // 会话头像
+    string chat_title = 3; // 会话标题
+    int64 read_seq_id = 4; // 已读消息ID
+    int64 max_seq_id = 5; // 最大消息ID
+    Message last_message = 6; // 最后一条消息
+    int64 active_time = 8; // 活跃时间
+    int32 unread_count = 9; // 未读数数量
+    int32 priority = 11; // 会话优先级，优先级的数值越大，优先级越高
+}
+
+message GetChatInfoRequest {
+    int64 user_id = 1;
+    int64 chat_id = 2;
+    int64 cursor = 3;
+    int32 limit = 4;
+}
+
+message GetChatInfoResponse {
+    repeated ChatInfo chat_info = 1; // 消息列表
+    int64 next_cursor = 2; // 下一次拉取的游标
+    bool has_more = 3; // 是否还有更多消息
+}
+
+service ChatService {
+    rpc GetChatInfo(GetChatInfoRequest) returns (GetChatInfoResponse);
+}

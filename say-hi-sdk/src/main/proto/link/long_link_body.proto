@@ -11,5 +11,5 @@ import "common/common.proto";
 message LongLinkBody {
   RequestClientInfo client_info = 1; // 请求的客户端信息
   string command = 2; // 长连信令
-  bytes body = 3; // 长连的业务数据
+  string body = 3; // 长连的业务数据
 }

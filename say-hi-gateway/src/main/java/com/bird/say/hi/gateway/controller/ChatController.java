@@ -2,8 +2,11 @@ package com.bird.say.hi.gateway.controller;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
 import com.bird.say.hi.gateway.common.Result;
+import com.bird.say.hi.gateway.common.ResultUtils;
 import com.bird.say.hi.gateway.controller.response.GetChatInfoResponse;
 import com.bird.say.hi.gateway.model.ChatInfo;
+import com.bird.say.hi.gateway.model.Message;
+import com.bird.say.hi.gateway.model.MessageType;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -11,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import utils.RandomPersonInfoUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,27 +43,37 @@ public class ChatController {
         // 模拟创建一些测试数据
         long currentTime = System.currentTimeMillis();
         for (int i = 0; i < limit; i++) {
+            // 创建一个模拟的最后一条消息
+            Message lastMessage = Message.builder()
+                    .messageId((long) (1000 + i))
+                    .chatId((long) i)
+                    .seqId((long) (i * 10))
+                    .fromUserId((long) (2000 + i))
+                    .messageType(MessageType.TEXT)
+                    .content("这是第" + i + "条消息内容")
+                    .showText("这是第" + i + "条消息")
+                    .createTime(currentTime - i * 12 * 60 * 60 * 1000L)
+                    .build();
+
             ChatInfo chatInfo = ChatInfo.builder()
-                    .chatId("session_" + i)
-                    .chatTitle(RandomPersonInfoUtil.getRandomChineseName())
-                    .lastActiveTime(currentTime - i * 12 * 60 * 60 * 1000L)
-                    .unreadCount(i * 5)
-                    .readSeqId(0L)
-                    .maxSeqId(i * 10L)
-                    .lastMessageContent("这是第" + i + "条消息内容")
-                    .lastMessageTime(currentTime - i * 12 * 60 * 60 * 1000L)
-                    .priority(ThreadLocalRandom.current().nextInt(100))
-                    .stickyTop(i % 2 == 0)
+                    .chatId((long) i)
                     .avatar("https://img1.baidu.com/it/u=3357071773,1618494340&fm=253&app=138&f=JPEG")
+                    .chatTitle("用户" + i)
+                    .readSeqId(0L)
+                    .maxSeqId((long) (i * 10))
+                    .lastMessage(lastMessage)
+                    .activeTime(currentTime - i * 12 * 60 * 60 * 1000L)
+                    .unreadCount(i * 5)
+                    .priority(ThreadLocalRandom.current().nextInt(100))
                     .build();
             result.add(chatInfo);
         }
 
         GetChatInfoResponse response = GetChatInfoResponse.builder()
-                .chatInfos(result)
+                .chatInfoList(result)
                 .hasMore(false)
                 .build();
 
-        return Result.success("拉取会话列表成功", response);
+        return ResultUtils.success("拉取会话列表成功", response);
     }
 }

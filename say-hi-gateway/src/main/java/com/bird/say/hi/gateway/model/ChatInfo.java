@@ -5,20 +5,20 @@ import lombok.Data;
 
 /**
  * @author Bird <coder-zrl@qq.com>
- * Created on 2025-10-23
+ * Created on 2025-10-24
  */
 @Data
 @Builder
 public class ChatInfo {
     /**
+     * 会话ID
+     */
+    private Long chatId;
+
+    /**
      * 会话头像
      */
     private String avatar;
-
-    /**
-     * 会话ID
-     */
-    private String chatId;
 
     /**
      * 会话标题
@@ -36,19 +36,14 @@ public class ChatInfo {
     private Long maxSeqId;
 
     /**
-     * 最后一条消息的时间
+     * 最后一条消息
      */
-    private Long lastMessageTime;
+    private Message lastMessage;
 
     /**
-     * 最后一条消息内容
+     * 活跃时间
      */
-    private String lastMessageContent;
-
-    /**
-     * 最后活跃时间戳
-     */
-    private Long lastActiveTime;
+    private Long activeTime;
 
     /**
      * 未读数数量
@@ -56,12 +51,7 @@ public class ChatInfo {
     private Integer unreadCount;
 
     /**
-     * 会话是否置顶
-     */
-    private Boolean stickyTop;
-
-    /**
-     * 会话优先级，按优先级降序排列
+     * 会话优先级，优先级的数值越大，优先级越高
      */
     private Integer priority;
 }

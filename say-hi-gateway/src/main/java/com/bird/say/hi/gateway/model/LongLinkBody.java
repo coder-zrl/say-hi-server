@@ -1,5 +1,6 @@
 package com.bird.say.hi.gateway.model;
 
+import com.bird.say.hi.gateway.LongLinkCommand;
 import lombok.Builder;
 import lombok.Data;
 
@@ -23,7 +24,7 @@ public class LongLinkBody {
     /**
      * 长连信令
      */
-    public String command;
+    public LongLinkCommand command;
 
     /**
      * 长连的业务数据
