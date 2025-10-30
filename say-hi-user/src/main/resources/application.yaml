@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: say-hi-user
+  config:
+    import:
+      - "classpath:application-common.yaml"
+      - "optional:nacos:say-hi-user.yaml"
+
+server:
+  port: 10088
+
+# gRPC服务配置
+grpc:
+  server:
+    port: 19988

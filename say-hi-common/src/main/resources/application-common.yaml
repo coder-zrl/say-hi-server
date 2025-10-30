@@ -32,6 +32,11 @@ grpc:
       negotiation-type: plaintext
       enableKeepAlive: true
       keepAliveWithoutCalls: true
+    say-hi-user:
+      address: 'discovery:///say-hi-user'
+      negotiation-type: plaintext
+      enableKeepAlive: true
+      keepAliveWithoutCalls: true
 
 mybatis-plus:
   global-config:
