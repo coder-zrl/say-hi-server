@@ -119,48 +119,4 @@ say-hi-server/
 
 ## 7. 开发注意事项
 
-1. 所有对外接口统一通过say-hi-gateway模块提供
-2. 微服务间通信使用gRPC，定义在say-hi-sdk模块中
-3. 数据模型需要在gateway和各微服务间保持一致
-4. WebSocket长连接由gateway模块维护
-5. 权限验证使用Sa-Token框架
-6. API文档使用Knife4j生成
-
-## 8. 当前状态
-
-目前项目处于初期开发阶段：
-
-- 已完成基础架构搭建
-- gateway模块实现了基本的RESTful API接口(模拟数据)
-- WebSocket长连接框架已搭建
-- gRPC协议定义已完成
-- 各微服务模块占位完成，待具体实现
-
-## 开发一个新功能的步骤
-
-### 开发一个RPC接口
-
-1. 阅读SDK中对应的proto文件，若没有相关接口定义则手动定义该接口，定义该接口的时候需要思考最常见的业务场景的入参格式，同时参考库表结构，避免不符合分库分表规则（库表结构我后序再补充）
-2. 在对应的微服务模块的RPC文件夹的RPC实现类中实现对应接口
-3. 补充并完善Service层、Mapper层接口逻辑，以供上层RPC实现接口调用
-4. 重新编译SDK模块，避免IDE无法直接识别新增的proto对象
-
-注意：RPC实现类需要满足以下模板，且不要在RPC实现类中掺杂过多业务逻辑，具体业务逻辑请下沉到Service层
-
-```java
-@Override
-public void sendMessage(SendMessageRequest request, StreamObserver<SendMessageResponse> responseObserver) {
-        String invokeName = "ChatToBCsGrpcService.sendMessage";
-        // 参数判断
-        Consumer<SendMessageRequest> checkParams = req -> {
-        checkArgument(req.getUserId() > 0, "invalid userId");
-        };
-
-        ProcessFunc<SendMessageRequest, SendMessageResponse> processFunc = req -> {
-        return messageService.sendMessage(req);
-        };
-
-        GrpcTemplate.execute(invokeName, request, checkParams, processFunc,
-        getResponseProcess(SendMessageResponse.class), responseObserver);
-        }
-```
+每次开发时都要参考@/docs/开发规范.md文件内的具体要求
