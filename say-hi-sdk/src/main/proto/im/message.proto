@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package com.bird.say.hi.im.sdk;
+package com.bird.say.hi.sdk;
 
 option java_package = "com.bird.say.hi.im.sdk";
 option java_outer_classname = "SayHiMessageProto";

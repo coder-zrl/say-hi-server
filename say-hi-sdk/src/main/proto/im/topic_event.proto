@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package com.bird.say.hi.sdk.event;
+package com.bird.say.hi.sdk;
 
 option java_package = "com.bird.say.hi.im.sdk.event";
 option java_outer_classname = "TopicEvent";
